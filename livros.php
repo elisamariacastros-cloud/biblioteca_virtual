@@ -74,9 +74,11 @@ footer {
                     <img src="https://conteudo.imguol.com.br/c/entretenimento/a4/2017/06/23/capa-do-livro-harry-potter-e-a-pedra-filosofal-1498234138852_v2_450x800.jpg" class="card-img-top" alt="Imagem do Livro">
                     <div class="card-body text-center">
                         <h5 class="card-title">Harry Potter e a Pedra Filosofal</h5>
-                        <p class="card-text text-muted">A adaptação cinematográfica estreou no 
-                        Brasil em 2001 e acompanha a jornada de Harry em Hogwarts, onde ele conhece 
-                        seus amigos Rony e Hermione e enfrenta desafios. </p>
+                        <p class="card-text text-muted">"Harry Potter e a Pedra Filosofal" é o primeiro livro da saga e apresenta Harry, 
+                            um garoto órfão que descobre que é um bruxo e é convidado para estudar em Hogwarts. Lá, ele faz amigos, 
+                            aprende sobre o mundo mágico, e descobre que uma Pedra Filosofal, capaz de conceder imortalidade, 
+                            está sendo ameaçada pelo Lord Voldemort, o mesmo bruxo que matou seus pais. 
+                            A trama acompanha Harry e seus amigos na tentativa de proteger a pedra.  </p>
                         <a href="#" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
@@ -101,10 +103,14 @@ footer {
             <!-- CARD 3 -->
             <div class="col-md-4">
                 <div class="card p-2 shadow-sm">
-                    <img src="images/livro3.jpg" class="card-img-top" alt="Imagem do Livro">
+                    <img src="https://m.media-amazon.com/images/I/61es086Y4cL._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Imagem do Livro">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Mais um Livro</h5>
-                        <p class="card-text text-muted">Informações rápidas do livro.</p>
+                        <h5 class="card-title">Os Três Porquinhos</h5>
+                        <p class="card-text text-muted">"Os Três Porquinhos" é uma fábula clássica sobre três irmãos porquinhos que saem 
+                            de casa para construir suas próprias moradias. O primeiro porquinho constrói uma casa de palha, o segundo de madeira, 
+                            e o terceiro, mais prudente, de tijolos. Um lobo mau tenta destruir as casas, mas só consegue derrubar as duas primeiras. 
+                            O lobo, então, tenta descer pela chaminé da casa de tijolos, onde os porquinhos o esperam com uma panela de água fervente. 
+                           </p>
                         <a href="#" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
