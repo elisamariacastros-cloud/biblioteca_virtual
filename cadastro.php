@@ -1,13 +1,32 @@
 <?php 
 session_start();
 include "conexao.php";
+
+if(isset($_POST['Cadastrar-se'])){
+
+    $nome = $_POST["nome"];
+    $email = $_POST["email"];
+    $senha = $_POST["senha"];
+    $idade = $_POST["idade"];
+    if (isset($_POST["telefone"])) {
+      echo 'jshxzuishdaiwu';
+    }
+    $telefone = $_POST["telefone"];
+
+    $sql = "INSERT INTO usuario (nome, email, senha, idade, telefone)
+            VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
+
+    if (mysqli_query($conexao, $sql)) {
+        echo "Novo registro criado";
+    } else {
+        echo "Erro: " . mysqli_error($conexao);
+    }
+
+    mysqli_close($conexao);
+}
 ?>
-<?php
-// login.php
-// Se já houver sessão iniciada, redirecionar (exemplo)
-// session_start();
-// if (!empty($_SESSION['user_id'])) header('Location: dashboard.php');
-?>
+
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -118,53 +137,39 @@ include "conexao.php";
             <p class="small-muted mb-4">Preencha os dados.</p>
 
             <!-- Formulário: enviar para login_handler.php -->
-            <form action="login_handler.php" method="post" novalidate>
-                 <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input required type="nome" class="form-control" id="nome" name="nome" placeholder="Nome Completo" autofocus>
-              </div>
+           <form action="" method="post" novalidate>
 
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input required type="email" class="form-control" id="email" name="email" placeholder="seu@exemplo.com" autofocus>
-              </div>
+    <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input required type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo">
+    </div>
 
-              <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <div class="input-group">
-                  <input required type="password" class="form-control" id="password" name="password" placeholder="••••••••">
-                  <button type="button" class="btn btn-outline-secondary" id="togglePwd" aria-label="Mostrar senha">
-                    <i class="fa fa-eye"></i>
-                  </button>
-                </div>
-              </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input required type="email" class="form-control" id="email" name="email" placeholder="seu@exemplo.com">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Senha</label>
+        <input required type="password" class="form-control" id="senha" name="senha">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Idade</label>
+        <input required type="number" class="form-control" id="idade" name="idade" placeholder="18">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Telefone</label>
+        <input required type="text" class="form-control" id="telefone" name="telefone" placeholder="37998746447">
+    </div>
+
+    <button type="submit" class="btn btn-pink btn-lg w-100" name="Cadastrar-se">
+        Cadastrar-se
+    </button>
+</form>
+
             
-              <form action="login_handler.php" method="post" novalidate>
-              <div class="mb-3">
-                <label for="idade" class="form-label">Idade</label>
-                <input required type="idade" class="form-control" id="idade" name="idade" placeholder="02/04/2009" autofocus>
-              </div>
-            <form action="login_handler.php" method="post" novalidate>
-              <div class="mb-3">
-                <label for="numero" class="form-label">Celular</label>
-                <input required type="numero" class="form-control" id="celular" name="celular" placeholder="37998746447" autofocus>
-              </div>
-
-             <div class="d-grid mb-3">
-              <a href="livros.php" class="btn btn-pink btn-lg">Cadastrar-se</a>
-            </div>
-            </form>
-
-            <hr class="my-4">
-            </div>
-
-            <!-- espaço para mensagens de erro vindo do PHP (ex: ?error=1) -->
-            <?php if (!empty($_GET['error'])): ?>
-              <div class="alert alert-danger mt-3" role="alert">
-                <?= htmlspecialchars($_GET['error']) ?>
-              </div>
-            <?php endif; ?>
-
           </div>
         </div>
       </div>

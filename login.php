@@ -1,16 +1,30 @@
-<?php
-session_start();
+<?php 
 include "conexao.php";
-$email=$_POST["email"];
-$senha=$_POST["senha"];
-
-$emailCorreto="elisamariacastros@gmail.com";
-$senhaCorrta="02042009";
-
-func
+?>
+<?php
+// Constantes do login de admin
+define("elisamariacastros@gmail.com", "123");
+define("livyaevelynsiqueira@gmail.com", "123");
 
 
+$mensagem = "";
 
+// Se o formulário foi enviado:
+if (isset($_POST["enviar"]) ) {
+
+    $email = $_POST["email"] ?? "";
+    $senha = $_POST["senha"] ?? "";
+
+    if ($email == "elisamariacastros@gmail.com" || $email == "livyaevelynsiqueira@gmail.com" && $senha == 123) {
+       
+        // Redireciona para a página de admin
+      header("Location: admin.php");
+        exit;
+
+    } else {
+        $mensagem = "Email ou senha incorretos!";
+    }
+}
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -140,7 +154,7 @@ func
             <p class="small-muted mb-4">Use seu email e senha para acessar.</p>
 
             <!-- Formulário: enviar para login_handler.php -->
-            <form action="login_handler.php" method="post" novalidate>
+            <form action="adm.php" method="post" novalidate>
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input required type="email" class="form-control" id="email" name="email" placeholder="seu@exemplo.com" autofocus>
