@@ -1,3 +1,7 @@
+<?php 
+session_start();
+include "conexao.php";
+?>
 <?php
 // login.php
 // Se já houver sessão iniciada, redirecionar (exemplo)

@@ -1,8 +1,16 @@
 <?php
-// login.php
-// Se já houver sessão iniciada, redirecionar (exemplo)
-// session_start();
-// if (!empty($_SESSION['user_id'])) header('Location: dashboard.php');
+session_start();
+include "conexao.php";
+$email=$_POST["email"];
+$senha=$_POST["senha"];
+
+$emailCorreto="elisamariacastros@gmail.com";
+$senhaCorrta="02042009";
+
+func
+
+
+
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -141,7 +149,7 @@
               <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
                 <div class="input-group">
-                  <input required type="password" class="form-control" id="password" name="password" placeholder="••••••••">
+                  <input required type="password" class="form-control" id="senha" name="senha" placeholder="••••••••">
                   <button type="button" class="btn btn-outline-secondary" id="togglePwd" aria-label="Mostrar senha">
                     <i class="fa fa-eye"></i>
                   </button>
@@ -149,6 +157,9 @@
               </div>
               <div class="d-grid mb-3">
                 <button type="submit" class="btn btn-pink btn-lg">Entrar</button>
+                <script>
+                 
+                </script>
               </div>
 
               <div class="text-center small-muted">

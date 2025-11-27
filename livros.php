@@ -1,3 +1,7 @@
+<?php 
+session_start();
+include "conexao.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -106,10 +110,11 @@ footer {
                     <img src="https://m.media-amazon.com/images/I/61es086Y4cL._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Imagem do Livro">
                     <div class="card-body text-center">
                         <h5 class="card-title">Os Três Porquinhos</h5>
-                        <p class="card-text text-muted">"Os Três Porquinhos" é uma fábula clássica sobre três irmãos porquinhos que saem 
-                            de casa para construir suas próprias moradias. O primeiro porquinho constrói uma casa de palha, o segundo de madeira, 
-                            e o terceiro, mais prudente, de tijolos. Um lobo mau tenta destruir as casas, mas só consegue derrubar as duas primeiras. 
-                            O lobo, então, tenta descer pela chaminé da casa de tijolos, onde os porquinhos o esperam com uma panela de água fervente. 
+                        <p class="card-text text-muted">"A fábula "Os Três Porquinhos" narra a história de três irmãos porquinhos que,
+                             ao saírem para construir suas próprias vidas, se deparam com a ameaça de um lobo mau. Enquanto dois deles 
+                             optam por construções rápidas e fáceis (palha e madeira), o terceiro, com mais preparo, constrói uma casa forte de tijolos.
+                              A narrativa explora a inépcia e a preguiça de dois dos irmãos contra a prudência e o trabalho árduo do terceiro, 
+                            que os salva de um final trágico ao conseguir deter o lobo e garantir a segurança de todos." 
                            </p>
                         <a href="#" class="btn btn-pink">Ver Detalhes</a>
                     </div>
