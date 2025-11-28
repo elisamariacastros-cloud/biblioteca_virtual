@@ -83,7 +83,7 @@ footer {
                             aprende sobre o mundo mágico, e descobre que uma Pedra Filosofal, capaz de conceder imortalidade, 
                             está sendo ameaçada pelo Lord Voldemort, o mesmo bruxo que matou seus pais. 
                             A trama acompanha Harry e seus amigos na tentativa de proteger a pedra.  </p>
-                        <a href="#" class="btn btn-pink">Ver Detalhes</a>
+                        <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@ footer {
                             inocência e as diferentes perspectivas da infância e da vida adulta, através das histórias contadas 
                             pelo príncipe sobre suas viagens por outros 
                             planetas e seus encontros com personagens que representam falhas humanas, como a ganância e a vaidade.</p>
-                        <a href="#" class="btn btn-pink">Ver Detalhes</a>
+                        <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@ footer {
                               A narrativa explora a inépcia e a preguiça de dois dos irmãos contra a prudência e o trabalho árduo do terceiro, 
                             que os salva de um final trágico ao conseguir deter o lobo e garantir a segurança de todos." 
                            </p>
-                        <a href="#" class="btn btn-pink">Ver Detalhes</a>
+                        <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
             </div>

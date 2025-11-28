@@ -4,20 +4,17 @@ include "conexao.php";
 
 if(isset($_POST['Cadastrar-se'])){
 
-    $nome = $_POST["nome"];
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
-    $idade = $_POST["idade"];
-    if (isset($_POST["telefone"])) {
-      echo 'jshxzuishdaiwu';
-    }
-    $telefone = $_POST["telefone"];
+    $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
+    $email = mysqli_real_escape_string($conexao, $_POST["email"]);
+    $senha = mysqli_real_escape_string($conexao, $_POST["senha"]);
+    $idade = (int) $_POST["idade"]; 
+    $telefone = mysqli_real_escape_string($conexao, $_POST["telefone"]);
 
     $sql = "INSERT INTO usuario (nome, email, senha, idade, telefone)
             VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
 
     if (mysqli_query($conexao, $sql)) {
-        echo "Novo registro criado";
+        echo "Novo registro criado com sucesso!";
     } else {
         echo "Erro: " . mysqli_error($conexao);
     }
@@ -32,12 +29,9 @@ if(isset($_POST['Cadastrar-se'])){
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Entrar — Biblioteca Virtual</title>
+  <title>Cadastrar — Biblioteca Virtual</title>
 
-  <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome (opcional para ícones) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
@@ -67,40 +61,14 @@ if(isset($_POST['Cadastrar-se'])){
       overflow: hidden;
       max-width: 920px;
       width: 100%;
-    }
-
-    .card-left {
-      background: linear-gradient(180deg, var(--pink-200), var(--pink-500));
-      color: white;
-      padding: 2.5rem;
+      background: white;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .brand {
-      display:flex;
-      gap:.6rem;
-      align-items:center;
-      font-weight:700;
-      font-size:1.25rem;
-    }
-    .brand .logo {
-      width:48px;
-      height:48px;
-      border-radius:10px;
-      background: rgba(255,255,255,0.14);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      font-size:1.2rem;
+      flex-direction: row;
     }
 
     .card-right {
       padding: 2.5rem;
-      background: white;
+      flex: 1;
     }
 
     .form-control:focus {
@@ -117,67 +85,53 @@ if(isset($_POST['Cadastrar-se'])){
 
     .small-muted { color: var(--muted); font-size:.9rem; }
 
-    /* Responsividade: empilha no mobile */
-    @media (max-width: 767.98px) {
-      .card-left { align-items:center; text-align:center; padding:1.8rem; }
-      .card-left .brand { justify-content:center; }
-    }
   </style>
 </head>
+
 <body>
 
-  
-    <!-- Lado direito: formulário -->
-    <div class="card-right col-lg-7">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-9 col-lg-10">
+<div class="card-login">
 
-            <h4 class="mb-3">Cadastrar-se</h4>
-            <p class="small-muted mb-4">Preencha os dados.</p>
+    <div class="card-right">
+      <h4 class="mb-3">Cadastrar-se</h4>
+      <p class="small-muted mb-4">Preencha os dados.</p>
 
-            <!-- Formulário: enviar para login_handler.php -->
-           <form action="" method="post" novalidate>
+      <form action="" method="post">
 
-    <div class="mb-3">
-        <label class="form-label">Nome</label>
-        <input required type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo">
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input required type="email" class="form-control" id="email" name="email" placeholder="seu@exemplo.com">
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Senha</label>
-        <input required type="password" class="form-control" id="senha" name="senha">
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Idade</label>
-        <input required type="number" class="form-control" id="idade" name="idade" placeholder="18">
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Telefone</label>
-        <input required type="text" class="form-control" id="telefone" name="telefone" placeholder="37998746447">
-    </div>
-
-    <button type="submit" class="btn btn-pink btn-lg w-100" name="Cadastrar-se">
-        Cadastrar-se
-    </button>
-</form>
-
-            
-          </div>
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input required type="text" class="form-control" name="nome" placeholder="Nome Completo">
         </div>
-      </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input required type="email" class="form-control" name="email" placeholder="seu@exemplo.com">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Senha</label>
+            <input required type="password" class="form-control" name="senha">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Idade</label>
+            <input required type="number" class="form-control" name="idade" placeholder="18">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Telefone</label>
+            <input required type="text" class="form-control" name="telefone" placeholder="37998746447">
+        </div>
+
+        <button type="submit" class="btn btn-pink btn-lg w-100" name="Cadastrar-se">
+          Cadastrar-se
+        </button>
+
+      </form>
+
     </div>
-  </div>
+</div>
 
-  <!-- Bootstrap JS (Popper incluido) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

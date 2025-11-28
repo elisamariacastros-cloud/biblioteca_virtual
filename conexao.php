@@ -1,8 +1,8 @@
 <?php
-$servidor = "localhost:3306";   // normalmente é localhost
+$servidor = "localhost:3307";   // normalmente é localhost
 $usuario  = "root";        // seu usuário do MySQL
-$senha    = "@Elisa0204";            // senha do MySQL (às vezes é vazia)
-$banco    = "biblioteca"; // coloque o nome do seu banco aqui
+$senha    = "L0i4v0y7a08@";            // senha do MySQL (às vezes é vazia)
+$banco    = "biblioteca"; 
 
 $conexao = new mysqli($servidor, $usuario, $senha, $banco);
 
