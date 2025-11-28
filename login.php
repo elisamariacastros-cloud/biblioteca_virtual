@@ -1,20 +1,17 @@
 <?php 
 include "conexao.php";
-?>
-<?php
+
+ 
 // Constantes do login de admin
 define("elisamariacastros@gmail.com", "123");
 define("livyaevelynsiqueira@gmail.com", "123");
 
-
+$email = $_POST["email"] ?? "";
+$senha = $_POST["senha"] ?? "";
 $mensagem = "";
 
 // Se o formulário foi enviado:
 if (isset($_POST["enviar"]) ) {
-
-    $email = $_POST["email"] ?? "";
-    $senha = $_POST["senha"] ?? "";
-
     if ($email == "elisamariacastros@gmail.com" || $email == "livyaevelynsiqueira@gmail.com" && $senha == 123) {
        
         // Redireciona para a página de admin
@@ -25,7 +22,23 @@ if (isset($_POST["enviar"]) ) {
         $mensagem = "Email ou senha incorretos!";
     }
 }
+//conferir se o usuario esta correto
+$sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
+$result = $conexao->query($sql);
+
+if ($result->num_rows > 0) {
+   alert("Login realizado com sucesso!");
+  header("Location: livros.php");  
+} else {
+    echo "Email ou senha incorretos!";
+}
 ?>
+
+
+
+
+
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
