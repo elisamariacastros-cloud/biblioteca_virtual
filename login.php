@@ -1,46 +1,40 @@
-<?php 
+<?php
+session_start();
 include "conexao.php";
 
- 
-// Constantes do login de admin
-define("elisamariacastros@gmail.com", "123");
-define("livyaevelynsiqueira@gmail.com", "123");
+if (isset($_POST["enviar"])) {
+    $email = mysqli_real_escape_string($conexao, $_POST["email"]);
+    $senha = $_POST["senha"];
 
-$email = $_POST["email"] ?? "";
-$senha = $_POST["senha"] ?? "";
-$mensagem = "";
+    // Busca no banco
+    $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
+    $result = mysqli_query($conexao, $sql);
 
-// Se o formulário foi enviado:
-if (isset($_POST["enviar"]) ) {
-    if ($email == "elisamariacastros@gmail.com" || $email == "livyaevelynsiqueira@gmail.com" && $senha == 123) {
-       
-        // Redireciona para a página de admin
-      header("Location: admin.php");
-        exit;
+    if (mysqli_num_rows($result) > 0) {
+
+        // Admins corretos
+        if (($email == 'elisamariacastros@gmail.com' || 
+             $email == 'livyaevelynsiqueira@gmail.com') 
+             && $senha == 123) {
+
+            header('Location: admin.php');
+            exit();
+        
+        } else  {
+            header('Location: livros.php');
+            exit();
+        }
 
     } else {
-        $mensagem = "Email ou senha incorretos!";
+        echo "<script>alert('Email ou senha incorretos!');</script>";
     }
-}
-//conferir se o usuario esta correto
-$sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
-$result = $conexao->query($sql);
-
-if ($result->num_rows > 0) {
-   alert("Login realizado com sucesso!");
-  header("Location: livros.php");  
-} else {
-    echo "Email ou senha incorretos!";
 }
 ?>
 
 
-
-
-
-
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,10 +44,10 @@ if ($result->num_rows > 0) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Font Awesome (opcional para ícones) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    :root{
+    :root {
       --pink-50: #fff0f6;
       --pink-100: #ffd6e8;
       --pink-200: #ff9ccf;
@@ -75,7 +69,7 @@ if ($result->num_rows > 0) {
     .card-login {
       border: 0;
       border-radius: 14px;
-      box-shadow: 0 8px 30px rgba(224,50,128,0.12);
+      box-shadow: 0 8px 30px rgba(224, 50, 128, 0.12);
       overflow: hidden;
       max-width: 920px;
       width: 100%;
@@ -92,22 +86,23 @@ if ($result->num_rows > 0) {
     }
 
     .brand {
-      display:flex;
-      gap:.6rem;
-      align-items:center;
-      font-weight:700;
-      font-size:1.25rem;
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.25rem;
     }
+
     .brand .logo {
-      width:48px;
-      height:48px;
-      border-radius:10px;
-      background: rgba(255,255,255,0.14);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      font-size:1.2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
     }
 
     .card-right {
@@ -116,26 +111,37 @@ if ($result->num_rows > 0) {
     }
 
     .form-control:focus {
-      box-shadow: 0 0 0 0.2rem rgba(255,77,166,0.18);
+      box-shadow: 0 0 0 0.2rem rgba(255, 77, 166, 0.18);
       border-color: var(--pink-500);
     }
 
     .btn-pink {
-      background: linear-gradient(90deg,var(--pink-500),var(--pink-700));
+      background: linear-gradient(90deg, var(--pink-500), var(--pink-700));
       border: none;
       color: white;
-      box-shadow: 0 6px 18px rgba(224,50,128,0.18);
+      box-shadow: 0 6px 18px rgba(224, 50, 128, 0.18);
     }
 
-    .small-muted { color: var(--muted); font-size:.9rem; }
+    .small-muted {
+      color: var(--muted);
+      font-size: .9rem;
+    }
 
     /* Responsividade: empilha no mobile */
     @media (max-width: 767.98px) {
-      .card-left { align-items:center; text-align:center; padding:1.8rem; }
-      .card-left .brand { justify-content:center; }
+      .card-left {
+        align-items: center;
+        text-align: center;
+        padding: 1.8rem;
+      }
+
+      .card-left .brand {
+        justify-content: center;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div class="card card-login d-flex flex-row">
@@ -151,7 +157,9 @@ if ($result->num_rows > 0) {
         <p class="mb-4 small-muted">Seu acervo virtual completo diversificado e sempre atualizado!</p>
 
         <ul class="list-unstyled small">
-          <li class="mb-2"><i class="fa fa-check-circle me-2"></i> <h4>Uma plataforma inteligente, segura e acessível para todos</h4></li>
+          <li class="mb-2"><i class="fa fa-check-circle me-2"></i>
+            <h4>Uma plataforma inteligente, segura e acessível para todos</h4>
+          </li>
 
         </ul>
       </div>
@@ -167,7 +175,7 @@ if ($result->num_rows > 0) {
             <p class="small-muted mb-4">Use seu email e senha para acessar.</p>
 
             <!-- Formulário: enviar para login_handler.php -->
-            <form action="adm.php" method="post" novalidate>
+            <form action="" method="post" novalidate>
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input required type="email" class="form-control" id="email" name="email" placeholder="seu@exemplo.com" autofocus>
@@ -183,9 +191,9 @@ if ($result->num_rows > 0) {
                 </div>
               </div>
               <div class="d-grid mb-3">
-                <button type="submit" class="btn btn-pink btn-lg">Entrar</button>
+                <button type="submit" neme="enviar" class="btn btn-pink btn-lg">Entrar</button>
                 <script>
-                 
+
                 </script>
               </div>
 
@@ -195,23 +203,24 @@ if ($result->num_rows > 0) {
             </form>
 
             <hr class="my-4">
-            </div>
-
-            <!-- espaço para mensagens de erro vindo do PHP (ex: ?error=1) -->
-            <?php if (!empty($_GET['error'])): ?>
-              <div class="alert alert-danger mt-3" role="alert">
-                <?= htmlspecialchars($_GET['error']) ?>
-              </div>
-            <?php endif; ?>
-
           </div>
+
+          <!-- espaço para mensagens de erro vindo do PHP (ex: ?error=1) -->
+          <?php if (!empty($_GET['error'])): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+              <?= htmlspecialchars($_GET['error']) ?>
+            </div>
+          <?php endif; ?>
+
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- Bootstrap JS (Popper incluido) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
