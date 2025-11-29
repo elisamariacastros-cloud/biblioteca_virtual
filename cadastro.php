@@ -1,28 +1,40 @@
-<?php 
+<?php
 session_start();
 include "conexao.php";
 
 if(isset($_POST['Cadastrar-se'])){
-
     $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
     $email = mysqli_real_escape_string($conexao, $_POST["email"]);
-    $senha = mysqli_real_escape_string($conexao, $_POST["senha"]);
-    $idade = (int) $_POST["idade"]; 
+    $senha = $_POST["senha"]; 
+    $idade = (int)$_POST["idade"];
     $telefone = mysqli_real_escape_string($conexao, $_POST["telefone"]);
 
-    $sql = "INSERT INTO usuario (nome, email, senha, idade, telefone)
-            VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
-
-    if (mysqli_query($conexao, $sql)) {
-         $_SESSION['sucesso'] = "Cadastro realizado com sucesso!";
-    header("Location: livros.php");
-    exit;
-    } else {
-        echo "Erro: " . mysqli_error($conexao);
+    //history.back() volta para o formulário
+    if(strlen($senha) < 8){
+        echo "<script>alert('Senha precisa ter 8+ caracteres'); history.back();</script>";
+    }
+    //filter var filtra de acordo com o que quer
+    else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        echo "<script>alert('Email inválido'); history.back();</script>";
+    }
+    else if($idade < 1 || $idade > 120){
+        echo "<script>alert('Idade deve ser entre 1-120'); history.back();</script>";
+    }
+    else{
+        // se não tiver erros insert
+        $sql = "INSERT INTO usuario (nome, email, senha, idade, telefone) 
+                VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
+        
+        if(mysqli_query($conexao, $sql)){
+            $_SESSION['sucesso'] = "Cadastro realizado!";
+            header("Location: livros.php");
+        } else {
+            echo "<script>alert('Erro no cadastro'); history.back();</script>";
+        }
     }
 }
+mysqli_close($conexao);
 ?>
-
 
 
 <!doctype html>
