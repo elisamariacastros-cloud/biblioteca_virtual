@@ -14,14 +14,15 @@ if(isset($_POST['Cadastrar-se'])){
             VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
 
     if (mysqli_query($conexao, $sql)) {
-        header("Location: cadastro.php?sucesso=1"); 
-        exit;
+         $_SESSION['sucesso'] = "Cadastro realizado com sucesso!";
+    header("Location: livros.php");
+    exit;
     } else {
         echo "Erro: " . mysqli_error($conexao);
     }
 }
-
 ?>
+
 
 
 <!doctype html>
@@ -95,14 +96,6 @@ if(isset($_POST['Cadastrar-se'])){
     <div class="card-right">
       <h4 class="mb-3">Cadastrar-se</h4>
       <p class="small-muted mb-4">Preencha os dados.</p>
-      <?php
-if (isset($_GET['sucesso'])) {
-    echo "<div style='padding: 10px; background: #d4f8d4; color: #0d730d;
-                border: 1px solid #0d730d; margin-bottom: 15px;'>
-            Cadastro realizado com sucesso!
-          </div>";
-}
-?>
 
       <form action="" method="post">
 
