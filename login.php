@@ -1,37 +1,43 @@
 <?php
 session_start();
-include "conexao.php";
+include "conexao.php"; // conecta ao banco
+
+$mensagem = "";
+
+// Lista dos administradores (PRECISAM estar cadastrados no BD)
+$admins = [
+    "livyaevelynsiqueira@gmail.com",
+    "elisamariacastros@gmail.com"
+];
 
 if (isset($_POST["enviar"])) {
-    $email = mysqli_real_escape_string($conexao, $_POST["email"]);
-    $senha = $_POST["senha"];
 
-    // Busca no banco
-    $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
+    $email = $_POST["email"] ?? "";
+    $senha = $_POST["senha"] ?? "";
+
+    // Consulta no banco
+    $sql = "SELECT * FROM usuario WHERE email='$email' AND senha='$senha' LIMIT 1";
     $result = mysqli_query($conexao, $sql);
 
     if (mysqli_num_rows($result) > 0) {
 
-        // Admins corretos
-        if (($email == 'elisamariacastros@gmail.com' || 
-             $email == 'livyaevelynsiqueira@gmail.com') 
-             && $senha == 123) {
+        // Se o email é admin → vai pro cadastro
+        if (in_array($email, $admins)) {
+            header("Location: adm.php");
+            exit;
 
-            header('Location: admin.php');
-            exit();
-        
-        } else  {
-            header('Location: livros.php');
-            exit();
+        // Se não for admin → vai para a página de livros
+        } else {
+            header("Location: livros.php");
+            exit;
         }
 
     } else {
-        echo "<script>alert('Email ou senha incorretos!');</script>";
+        $mensagem = "<div class='alert alert-danger mt-2'>Email ou senha incorretos!</div>";
     }
 }
+
 ?>
-
-
 <!doctype html>
 <html lang="pt-BR">
 
@@ -43,7 +49,7 @@ if (isset($_POST["enviar"])) {
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Font Awesome (opcional para ícones) -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
@@ -127,25 +133,25 @@ if (isset($_POST["enviar"])) {
       font-size: .9rem;
     }
 
-    /* Responsividade: empilha no mobile */
     @media (max-width: 767.98px) {
       .card-left {
         align-items: center;
         text-align: center;
         padding: 1.8rem;
       }
-
       .card-left .brand {
         justify-content: center;
       }
     }
   </style>
+
 </head>
 
 <body>
 
   <div class="card card-login d-flex flex-row">
-    <!-- Lado esquerdo: destaque / branding -->
+
+    <!-- Lado esquerdo -->
     <div class="card-left col-lg-5 d-none d-lg-flex">
       <div>
         <div class="brand mb-4">
@@ -154,18 +160,17 @@ if (isset($_POST["enviar"])) {
         </div>
 
         <h3 class="mb-3">Bem-vinda de volta!</h3>
-        <p class="mb-4 small-muted">Seu acervo virtual completo diversificado e sempre atualizado!</p>
+        <p class="mb-4 small-muted">Seu acervo virtual completo, diversificado e sempre atualizado!</p>
 
         <ul class="list-unstyled small">
           <li class="mb-2"><i class="fa fa-check-circle me-2"></i>
             <h4>Uma plataforma inteligente, segura e acessível para todos</h4>
           </li>
-
         </ul>
       </div>
     </div>
 
-    <!-- Lado direito: formulário -->
+    <!-- Lado direito (formulário) -->
     <div class="card-right col-lg-7">
       <div class="container">
         <div class="row justify-content-center">
@@ -174,51 +179,41 @@ if (isset($_POST["enviar"])) {
             <h4 class="mb-3">Entrar na sua conta</h4>
             <p class="small-muted mb-4">Use seu email e senha para acessar.</p>
 
-            <!-- Formulário: enviar para login_handler.php -->
             <form action="" method="post" novalidate>
+              
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input required type="email" class="form-control" id="email" name="email" placeholder="seu@exemplo.com" autofocus>
               </div>
 
               <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <div class="input-group">
-                  <input required type="password" class="form-control" id="senha" name="senha" placeholder="••••••••">
-                  <button type="button" class="btn btn-outline-secondary" id="togglePwd" aria-label="Mostrar senha">
-                    <i class="fa fa-eye"></i>
-                  </button>
-                </div>
+                <label for="senha" class="form-label">Senha</label>
+                <input required type="password" class="form-control" id="senha" name="senha" placeholder="••••••••">
               </div>
-              <div class="d-grid mb-3">
-                <button type="submit" neme="enviar" class="btn btn-pink btn-lg">Entrar</button>
-                <script>
 
-                </script>
+              <!-- MENSAGEM DE ERRO DO PHP -->
+              <?= $mensagem ?>
+
+              <div class="d-grid mb-3">
+                <button type="submit" name="enviar" class="btn btn-pink btn-lg">Entrar</button>
               </div>
 
               <div class="text-center small-muted">
                 Não tem conta? <a href="cadastro.php">Criar conta</a>
               </div>
+
             </form>
 
             <hr class="my-4">
+
           </div>
-
-          <!-- espaço para mensagens de erro vindo do PHP (ex: ?error=1) -->
-          <?php if (!empty($_GET['error'])): ?>
-            <div class="alert alert-danger mt-3" role="alert">
-              <?= htmlspecialchars($_GET['error']) ?>
-            </div>
-          <?php endif; ?>
-
         </div>
       </div>
     </div>
-  </div>
+
   </div>
 
-  <!-- Bootstrap JS (Popper incluido) -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
