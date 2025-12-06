@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "conexao.php"; // conecta ao banco
+include "conexao.php"; 
 
 $mensagem = "";
 
@@ -21,12 +21,11 @@ if (isset($_POST["enviar"])) {
 
     if (mysqli_num_rows($result) > 0) {
 
-        // Se o email é admin → vai pro cadastro
+        //in_array verifica se existe um valor num array
         if (in_array($email, $admins)) {
             header("Location: adm.php");
             exit;
 
-        // Se não for admin → vai para a página de livros
         } else {
             header("Location: livros.php");
             exit;
