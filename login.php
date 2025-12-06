@@ -27,7 +27,7 @@ if (isset($_POST["enviar"])) {
             exit;
 
         } else {
-            header("Location: livros.php");
+            header("Location: livro/livros.php");
             exit;
         }
 

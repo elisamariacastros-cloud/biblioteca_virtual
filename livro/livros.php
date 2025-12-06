@@ -1,15 +1,13 @@
 <?php 
 session_start();
-<<<<<<< HEAD:livro/livros.php
 include "../conexao.php";
-=======
-include "conexao.php";
+
 if (isset($_SESSION['sucesso'])) {
-   echo "<script>alert('{$_SESSION['sucesso']}');</script>";
+    echo "<script>alert('{$_SESSION['sucesso']}');</script>";
     unset($_SESSION['sucesso']); // APAGA depois de mostrar
 }
->>>>>>> 773fa07850140aa1e0b17d83e43eb4eaa459edce:livros.php
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -87,7 +85,7 @@ footer {
                     <div class="card-body text-center">
                         <h5 class="card-title">Harry Potter e a Pedra Filosofal</h5>
                         <p class="card-text text-muted"></p>
-                        <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
+                        <a href="detalhes.php?id=1" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +97,7 @@ footer {
                     <div class="card-body text-center">
                         <h5 class="card-title">O Pequeno Principe</h5>
                         <p class="card-text text-muted"></p>
-                        <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
+                        <a href="detalhes.php?id=2" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
             </div>
@@ -112,7 +110,7 @@ footer {
                         <h5 class="card-title">Os Três Porquinhos</h5>
                         <p class="card-text text-muted">
                            </p>
-                        <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
+                        <a href="detalhes.php?id=3" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
             </div>
