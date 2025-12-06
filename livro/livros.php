@@ -1,6 +1,14 @@
 <?php 
 session_start();
+<<<<<<< HEAD:livro/livros.php
 include "../conexao.php";
+=======
+include "conexao.php";
+if (isset($_SESSION['sucesso'])) {
+   echo "<script>alert('{$_SESSION['sucesso']}');</script>";
+    unset($_SESSION['sucesso']); // APAGA depois de mostrar
+}
+>>>>>>> 773fa07850140aa1e0b17d83e43eb4eaa459edce:livros.php
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -78,11 +86,7 @@ footer {
                     <img src="https://conteudo.imguol.com.br/c/entretenimento/a4/2017/06/23/capa-do-livro-harry-potter-e-a-pedra-filosofal-1498234138852_v2_450x800.jpg" class="card-img-top" alt="Imagem do Livro">
                     <div class="card-body text-center">
                         <h5 class="card-title">Harry Potter e a Pedra Filosofal</h5>
-                        <p class="card-text text-muted">"Harry Potter e a Pedra Filosofal" é o primeiro livro da saga e apresenta Harry, 
-                            um garoto órfão que descobre que é um bruxo e é convidado para estudar em Hogwarts. Lá, ele faz amigos, 
-                            aprende sobre o mundo mágico, e descobre que uma Pedra Filosofal, capaz de conceder imortalidade, 
-                            está sendo ameaçada pelo Lord Voldemort, o mesmo bruxo que matou seus pais. 
-                            A trama acompanha Harry e seus amigos na tentativa de proteger a pedra.  </p>
+                        <p class="card-text text-muted"></p>
                         <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
@@ -94,11 +98,7 @@ footer {
                     <img src="https://m.media-amazon.com/images/I/81SVIwe5L9L._UF1000,1000_QL80_.jpg" class="card-img-top" alt="Imagem do Livro">
                     <div class="card-body text-center">
                         <h5 class="card-title">O Pequeno Principe</h5>
-                        <p class="card-text text-muted">O Pequeno Príncipe" narra o encontro de um aviador, que caiu no deserto do Saara, 
-                            com um menino de outro planeta, o asteroide B-612. O livro é uma alegoria sobre a amizade, o amor, a perda da 
-                            inocência e as diferentes perspectivas da infância e da vida adulta, através das histórias contadas 
-                            pelo príncipe sobre suas viagens por outros 
-                            planetas e seus encontros com personagens que representam falhas humanas, como a ganância e a vaidade.</p>
+                        <p class="card-text text-muted"></p>
                         <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
                     </div>
                 </div>
@@ -110,11 +110,7 @@ footer {
                     <img src="https://m.media-amazon.com/images/I/61es086Y4cL._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Imagem do Livro">
                     <div class="card-body text-center">
                         <h5 class="card-title">Os Três Porquinhos</h5>
-                        <p class="card-text text-muted">"A fábula "Os Três Porquinhos" narra a história de três irmãos porquinhos que,
-                             ao saírem para construir suas próprias vidas, se deparam com a ameaça de um lobo mau. Enquanto dois deles 
-                             optam por construções rápidas e fáceis (palha e madeira), o terceiro, com mais preparo, constrói uma casa forte de tijolos.
-                              A narrativa explora a inépcia e a preguiça de dois dos irmãos contra a prudência e o trabalho árduo do terceiro, 
-                            que os salva de um final trágico ao conseguir deter o lobo e garantir a segurança de todos." 
+                        <p class="card-text text-muted">
                            </p>
                         <a href="detalhes.php" class="btn btn-pink">Ver Detalhes</a>
                     </div>
