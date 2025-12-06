@@ -1,5 +1,5 @@
 <?php 
-include "conexao.php";
+include "../conexao.php";
 ?>
 <?php
 // Constantes do login de admin
@@ -134,7 +134,7 @@ if (isset($_POST["enviar"]) ) {
           Biblioteca Virtual
         </div>
 
-        <h3 class="mb-3">Bem-vinda de volta!</h3>
+        <h3 class="mb-3">Bem-vindo de volta!</h3>
         <p class="mb-4 small-muted">Seu acervo virtual completo diversificado e sempre atualizado!</p>
 
         <ul class="list-unstyled small">
@@ -163,10 +163,12 @@ if (isset($_POST["enviar"]) ) {
               <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
                 <div class="input-group">
-                  <input required type="password" class="form-control" id="senha" name="senha" placeholder="••••••••">
-                  <button type="button" class="btn btn-outline-secondary" id="togglePwd" aria-label="Mostrar senha">
-                    <i class="fa fa-eye"></i>
-                  </button>
+    <input required type="password" id="senha" class="form-control" placeholder="Digite sua senha">
+
+    <button type="button" class="btn btn-outline-secondary" id="togglePwd" aria-label="Mostrar senha">
+        <i class="fa fa-eye-slash" id="iconEye"></i> 
+    </button>
+</div>
                 </div>
               </div>
               <div class="d-grid mb-3">
@@ -197,8 +199,24 @@ if (isset($_POST["enviar"]) ) {
     </div>
   </div>
 
-  <!-- Bootstrap JS (Popper incluido) -->
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<script>
+document.getElementById('togglePwd').addEventListener('click', function () {
+    const input = document.getElementById('senha');
+    const icon = document.getElementById('iconEye');
+
+    if (input.type === "password") {
+        input.type = "text";                 // mostrar senha
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");        // olho aberto
+    } else {
+        input.type = "password";             // esconder senha
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");  // olho fechado
+    }
+});
+</script>
 </html>
