@@ -1,10 +1,14 @@
 <?php 
 session_start();
+<<<<<<< HEAD:livro/livros.php
+include "../conexao.php";
+=======
 include "conexao.php";
 if (isset($_SESSION['sucesso'])) {
    echo "<script>alert('{$_SESSION['sucesso']}');</script>";
     unset($_SESSION['sucesso']); // APAGA depois de mostrar
 }
+>>>>>>> 773fa07850140aa1e0b17d83e43eb4eaa459edce:livros.php
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

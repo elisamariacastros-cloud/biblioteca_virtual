@@ -1,3 +1,9 @@
+<<<<<<< HEAD:usuario/login.php
+<?php 
+include "../conexao.php";
+?>
+=======
+>>>>>>> 773fa07850140aa1e0b17d83e43eb4eaa459edce:login.php
 <?php
 session_start();
 include "conexao.php"; 
@@ -158,8 +164,13 @@ if (isset($_POST["enviar"])) {
           Biblioteca Virtual
         </div>
 
+<<<<<<< HEAD:usuario/login.php
+        <h3 class="mb-3">Bem-vindo de volta!</h3>
+        <p class="mb-4 small-muted">Seu acervo virtual completo diversificado e sempre atualizado!</p>
+=======
         <h3 class="mb-3">Bem-vinda de volta!</h3>
         <p class="mb-4 small-muted">Seu acervo virtual completo, diversificado e sempre atualizado!</p>
+>>>>>>> 773fa07850140aa1e0b17d83e43eb4eaa459edce:login.php
 
         <ul class="list-unstyled small">
           <li class="mb-2"><i class="fa fa-check-circle me-2"></i>
@@ -186,8 +197,20 @@ if (isset($_POST["enviar"])) {
               </div>
 
               <div class="mb-3">
+<<<<<<< HEAD:usuario/login.php
+                <label for="password" class="form-label">Senha</label>
+                <div class="input-group">
+    <input required type="password" id="senha" class="form-control" placeholder="Digite sua senha">
+
+    <button type="button" class="btn btn-outline-secondary" id="togglePwd" aria-label="Mostrar senha">
+        <i class="fa fa-eye-slash" id="iconEye"></i> 
+    </button>
+</div>
+                </div>
+=======
                 <label for="senha" class="form-label">Senha</label>
                 <input required type="password" class="form-control" id="senha" name="senha" placeholder="••••••••">
+>>>>>>> 773fa07850140aa1e0b17d83e43eb4eaa459edce:login.php
               </div>
 
               <!-- MENSAGEM DE ERRO DO PHP -->
@@ -212,9 +235,32 @@ if (isset($_POST["enviar"])) {
 
   </div>
 
+<<<<<<< HEAD:usuario/login.php
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+<script>
+document.getElementById('togglePwd').addEventListener('click', function () {
+    const input = document.getElementById('senha');
+    const icon = document.getElementById('iconEye');
+
+    if (input.type === "password") {
+        input.type = "text";                 // mostrar senha
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");        // olho aberto
+    } else {
+        input.type = "password";             // esconder senha
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");  // olho fechado
+    }
+});
+</script>
+=======
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
+>>>>>>> 773fa07850140aa1e0b17d83e43eb4eaa459edce:login.php
 </html>

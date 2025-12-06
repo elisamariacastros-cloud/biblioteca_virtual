@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "conexao.php";
+include "../conexao.php";
 
 if(isset($_POST['Cadastrar-se'])){
     $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
