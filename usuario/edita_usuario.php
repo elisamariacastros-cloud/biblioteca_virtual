@@ -115,7 +115,10 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
         <label class="form-label">Email</label>
         <input required type="email" class="form-control" name="email" value="<?= $linha['email'] ?>">
     </div>
-
+    <div class="mb-3">
+    <label class="form-label">Senha</label>
+    <input required type="password" class="form-control" name="senha" value="<?= $linha['senha'] ?>">
+</div>
     <div class="mb-3">
         <label class="form-label">Idade</label>
         <input required type="number" class="form-control" name="idade" value="<?= $linha['idade'] ?>">

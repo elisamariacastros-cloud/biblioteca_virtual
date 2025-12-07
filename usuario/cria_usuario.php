@@ -2,55 +2,56 @@
 session_start();
 include "../conexao.php";
 
-if(isset($_POST['Cadastrar-se'])){
+// PROCESSAR O FORMULÁRIO
+if(isset($_POST['salvar'])){
     $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
     $email = mysqli_real_escape_string($conexao, $_POST["email"]);
     $senha = $_POST["senha"]; 
     $idade = (int)$_POST["idade"];
     $telefone = mysqli_real_escape_string($conexao, $_POST["telefone"]);
 
-    //history.back() volta para o formulário
+    // Validações
     if(strlen($senha) < 8){
-        echo "<script>alert('Senha precisa ter 8+ caracteres'); history.back();</script>";
+        echo "<script>alert('Senha precisa ter ao menos 8 caracteres'); history.back();</script>";
+        exit;
     }
-    //filter var filtra de acordo com o que quer
-    else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         echo "<script>alert('Email inválido'); history.back();</script>";
+        exit;
     }
-    else if($idade < 1 || $idade > 120){
-        echo "<script>alert('Idade deve ser entre 1-120'); history.back();</script>";
+    if($idade < 1 || $idade > 120){
+        echo "<script>alert('Idade deve ser entre 1 e 120'); history.back();</script>";
+        exit;
     }
-    else{
-        // se não tiver erros insert
-        $sql = "INSERT INTO usuario (nome, email, senha, idade, telefone) 
-                VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
-        
-        if(mysqli_query($conexao, $sql)){
-            $_SESSION['sucesso'] = "Cadastro realizado!";
-            header("Location: livros.php");
-        } else {
-            echo "<script>alert('Erro no cadastro'); history.back();</script>";
-        }
+
+    // INSERT
+    $sql = "INSERT INTO usuario (nome, email, senha, idade, telefone) 
+            VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
+
+    if(mysqli_query($conexao, $sql)){
+        $_SESSION['sucesso'] = "Usuário cadastrado com sucesso!";
+        header("Location: lista_usuario.php");
+        exit;
+    } else {
+        echo "<script>alert('Erro ao cadastrar usuário'); history.back();</script>";
+        exit;
     }
 }
+
 mysqli_close($conexao);
 ?>
-
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cadastrar — Biblioteca Virtual</title>
+  <title>Adicionar Usuário — Biblioteca Virtual</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
     :root{
       --pink-50: #fff0f6;
-      --pink-100: #ffd6e8;
       --pink-200: #ff9ccf;
       --pink-500: #ff4da6;
       --pink-700: #e03280;
@@ -58,56 +59,33 @@ mysqli_close($conexao);
     }
 
     body {
-      min-height: 100vh;
-      background: linear-gradient(180deg, var(--pink-50) 0%, #ffffff 50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #ffe6f2;
       padding: 2rem;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    .card-login {
-      border: 0;
+    .card-form {
+      max-width: 600px;
+      margin: auto;
       border-radius: 14px;
-      box-shadow: 0 8px 30px rgba(224,50,128,0.12);
-      overflow: hidden;
-      max-width: 920px;
-      width: 100%;
-      background: white;
-      display: flex;
-      flex-direction: row;
-    }
-
-    .card-right {
-      padding: 2.5rem;
-      flex: 1;
-    }
-
-    .form-control:focus {
-      box-shadow: 0 0 0 0.2rem rgba(255,77,166,0.18);
-      border-color: var(--pink-500);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      background: #fff;
+      padding: 2rem;
     }
 
     .btn-pink {
       background: linear-gradient(90deg,var(--pink-500),var(--pink-700));
       border: none;
       color: white;
-      box-shadow: 0 6px 18px rgba(224,50,128,0.18);
+      font-weight: 600;
     }
-
-    .small-muted { color: var(--muted); font-size:.9rem; }
 
   </style>
 </head>
 
 <body>
 
-<div class="card-login">
-
-    <div class="card-right">
-      <h4 class="mb-3">Cadastrar-se</h4>
-      <p class="small-muted mb-4">Preencha os dados.</p>
+<div class="card-form">
+      <h4 class="mb-3 text-center">Cadastrar Usuário</h4>
 
       <form action="" method="post">
 
@@ -128,23 +106,19 @@ mysqli_close($conexao);
 
         <div class="mb-3">
             <label class="form-label">Idade</label>
-            <input required type="number" class="form-control" name="idade" placeholder="18">
+            <input required type="number" class="form-control" name="idade">
         </div>
 
         <div class="mb-3">
             <label class="form-label">Telefone</label>
-            <input required type="text" class="form-control" name="telefone" placeholder="37998746447">
+            <input required type="text" class="form-control" name="telefone">
         </div>
 
-        <button type="submit" class="btn btn-pink btn-lg w-100" name="Cadastrar-se">
-          Cadastrar-se
-        </button>
-
+        <button type="submit" class="btn btn-pink w-100" name="salvar">Salvar</button>
       </form>
 
-    </div>
+      <a class="btn btn-secondary w-100 mt-2" href="lista_usuario.php">Voltar</a>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
