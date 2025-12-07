@@ -102,7 +102,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
   <h4 class="mb-3">Editar Usuário</h4>
   <p class="small-muted mb-4">Modifique os dados e confirme.</p>
 
-  <form action="form_usuario.php" method="post">
+  <form action="lista_usuario.php" method="post">
 
     <input type="hidden" name="id" value="<?= $linha['id'] ?>">
 
@@ -114,10 +114,16 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
     <div class="mb-3">
         <label class="form-label">Email</label>
         <input required type="email" class="form-control" name="email" value="<?= $linha['email'] ?>">
-    </div>
     <div class="mb-3">
     <label class="form-label">Senha</label>
-    <input required type="password" class="form-control" name="senha" value="<?= $linha['senha'] ?>">
+
+    <div class="input-group">
+        <input required type="password" class="form-control" id="senha" name="senha" value="<?= $linha['senha'] ?>">
+
+        <button type="button" class="btn btn-outline-secondary" onclick="mostrarSenha()">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
 </div>
     <div class="mb-3">
         <label class="form-label">Idade</label>
@@ -137,7 +143,16 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 <?php endif; ?>
 
 </div>
-
+<script>
+function mostrarSenha(){
+    const campo = document.getElementById("senha");
+    if(campo.type === "password"){
+        campo.type = "text";
+    } else {
+        campo.type = "password";
+    }
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

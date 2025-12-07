@@ -68,7 +68,7 @@ include "../conexao.php";
 
         <h1 class="text-center mb-4 titulo">Painel do Administrador</h1>
 
-        <!-- Usamos row + col-sm-6 + col-md-4 = SUPER responsivo -->
+      
         <div class="row g-4 justify-content-center">
 
             <!-- CRUD USUÁRIOS -->
@@ -76,7 +76,7 @@ include "../conexao.php";
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title">Usuários</h5>
-                        <a href="usuario/lista_usuario.php" class="btn btn-rosa mt-2 w-100">Gerenciar Usuários</a>
+                        <a href="../usuario/lista_usuario.php" class="btn btn-rosa mt-2 w-100">Gerenciar Usuários</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@ include "../conexao.php";
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title">Livros</h5>
-                        <a href="livro/lista_livro.php" class="btn btn-rosa mt-2 w-100">Gerenciar Livros</a>
+                        <a href="../livro/lista_livro.php" class="btn btn-rosa mt-2 w-100">Gerenciar Livros</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@ include "../conexao.php";
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title">Categorias</h5>
-                        <a href="categoria/lista_categoria.php" class="btn btn-rosa mt-2 w-100">Gerenciar Categorias</a>
+                        <a href="../categoria/lista_categoria.php" class="btn btn-rosa mt-2 w-100">Gerenciar Categorias</a>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@ include "../conexao.php";
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title">Downloads</h5>
-                        <a href="download/lista_download.php" class="btn btn-rosa mt-2 w-100">Gerenciar Downloads</a>
+                        <a href="../download/lista_download.php" class="btn btn-rosa mt-2 w-100">Gerenciar Downloads</a>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@ include "../conexao.php";
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title">Telefones</h5>
-                        <a href="telefone/lista_telefone.php" class="btn btn-rosa mt-2 w-100">Gerenciar Telefones</a>
+                        <a href="../telefone/lista_telefone.php" class="btn btn-rosa mt-2 w-100">Gerenciar Telefones</a>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@ include "../conexao.php";
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
                         <h5 class="card-title">Sair</h5>
-                        <a href="../logout.php" class="btn btn-danger mt-2 w-100">Logout</a>
+                        <a href="../usuario/login.php" class="btn btn-danger mt-2 w-100">Logout</a>
                     </div>
                 </div>
             </div>

@@ -30,7 +30,7 @@ if(isset($_POST['salvar'])){
 
     if(mysqli_query($conexao, $sql)){
         $_SESSION['sucesso'] = "Usuário cadastrado com sucesso!";
-        header("Location: lista_usuario.php");
+        header("Location: login.php");
         exit;
     } else {
         echo "<script>alert('Erro ao cadastrar usuário'); history.back();</script>";
@@ -48,6 +48,7 @@ mysqli_close($conexao);
   <title>Adicionar Usuário — Biblioteca Virtual</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     :root{
@@ -101,9 +102,14 @@ mysqli_close($conexao);
 
         <div class="mb-3">
             <label class="form-label">Senha</label>
-            <input required type="password" class="form-control" name="senha">
+            <div class="input-group">
+                <input required type="password" class="form-control" id="senha" name="senha">
+                <button type="button" class="btn btn-outline-secondary" id="togglePwd">
+                    <i class="fa fa-eye-slash" id="iconEye"></i>
+                </button>
+            </div>
         </div>
-
+        
         <div class="mb-3">
             <label class="form-label">Idade</label>
             <input required type="number" class="form-control" name="idade">
@@ -117,8 +123,24 @@ mysqli_close($conexao);
         <button type="submit" class="btn btn-pink w-100" name="salvar">Salvar</button>
       </form>
 
-      <a class="btn btn-secondary w-100 mt-2" href="lista_usuario.php">Voltar</a>
+      
 </div>
 
+<script>
+document.getElementById('togglePwd').addEventListener('click', function () {
+    const input = document.getElementById('senha');
+    const icon = document.getElementById('iconEye');
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }
+});
+</script>
 </body>
 </html>

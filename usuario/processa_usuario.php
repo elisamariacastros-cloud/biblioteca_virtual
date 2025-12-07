@@ -19,5 +19,5 @@
     }
 
     mysqli_close($conexao);
-    header('Location: http://localhost/crud/lista_aluno.php?msg='.$msg);
+    header('Location: lista_aluno.php?msg='.$msg);
 ?>
