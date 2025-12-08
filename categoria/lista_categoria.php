@@ -1,10 +1,26 @@
 <?php
 include '../conexao.php';
 
-$sql = "SELECT categoria.*, livro.titulo 
-        FROM categoria 
-        JOIN livro ON categoria.livro_id = livro.id
-        ORDER BY nome ASC";
+$pesquisa = $_GET['pesquisa'] ?? '';
+
+// Se tiver pesquisa, filtra
+if (!empty($pesquisa)) {
+    $pesquisa = mysqli_real_escape_string($conexao, $pesquisa);
+
+    $sql = "SELECT categoria.*, livro.titulo 
+            FROM categoria 
+            JOIN livro ON categoria.livro_id = livro.id
+            WHERE categoria.nome LIKE '%$pesquisa%'
+               OR livro.titulo LIKE '%$pesquisa%'
+            ORDER BY nome ASC";
+
+} else {
+    // Sem pesquisa, lista tudo
+    $sql = "SELECT categoria.*, livro.titulo 
+            FROM categoria 
+            JOIN livro ON categoria.livro_id = livro.id
+            ORDER BY nome ASC";
+}
 
 $result = mysqli_query($conexao, $sql);
 ?>
@@ -23,7 +39,6 @@ $result = mysqli_query($conexao, $sql);
     .btn-pink { background:#d63384;color:white; }
     .btn-pink:hover { background:#b0266a; }
 
-    /* Botão Editar igual ao de Livros */
     .btn-edit {
         background:#ffd6e8;
         border:none;
@@ -34,7 +49,6 @@ $result = mysqli_query($conexao, $sql);
     }
     .btn-edit:hover { background:#ffb3d9; }
 
-    /* Botão Excluir igual ao de Livros */
     .btn-delete {
         background:#ff9c9c;
         border:none;
@@ -53,10 +67,25 @@ $result = mysqli_query($conexao, $sql);
 
 <div class="container">
 
+    <!-- BOTÃO CRIAR -->
     <a href="cria_categoria.php" class="btn btn-pink mb-3">
         <i class="fa fa-plus"></i> Adicionar Categoria
     </a>
 
+    <!-- CAMPO DE PESQUISA -->
+    <form method="GET" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="pesquisa" class="form-control" 
+                   placeholder="Pesquisar categoria ou livro..."
+                   value="<?= htmlspecialchars($pesquisa) ?>">
+
+            <button class="btn btn-pink">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </form>
+
+    <!-- TABELA -->
     <table class="table table-striped table-hover align-middle">
         <thead>
             <tr>
@@ -74,19 +103,15 @@ $result = mysqli_query($conexao, $sql);
                 <td><?= $row['titulo'] ?></td>
                 <td><?= $row['nome'] ?></td>
                 <td>
-
-                    <!-- Ícone Editar -->
                     <a href="edita_categoria.php?id=<?= $row['id'] ?>" class="btn-edit">
                         <i class="fa-solid fa-pen"></i>
                     </a>
 
-                    <!-- Ícone Excluir -->
                     <a href="excluir_categoria.php?id=<?= $row['id'] ?>" 
                        class="btn-delete"
                        onclick="return confirm('Deseja excluir esta categoria?')">
                         <i class="fa-solid fa-trash"></i>
                     </a>
-
                 </td>
             </tr>
         <?php endwhile; ?>

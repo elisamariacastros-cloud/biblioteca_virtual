@@ -1,7 +1,25 @@
 <?php 
 include '../conexao.php';
 
-$sql = "SELECT * FROM livro";
+// Recebe busca
+$pesquisa = $_GET['pesquisa'] ?? '';
+$pesq = mysqli_real_escape_string($conexao, $pesquisa);
+
+// Consulta
+if (empty($pesquisa)) {
+    $sql = "SELECT * FROM livro";
+} else {
+    $sql = "
+        SELECT * FROM livro
+        WHERE
+            LOWER(titulo) LIKE LOWER('%$pesq%')
+        OR  LOWER(autor) LIKE LOWER('%$pesq%')
+        OR  LOWER(editora) LIKE LOWER('%$pesq%')
+        OR  LOWER(anoPublicacao) LIKE LOWER('%$pesq%')
+        OR  LOWER(id) LIKE LOWER('%$pesq%')
+    ";
+}
+
 $resultado = mysqli_query($conexao, $sql);
 ?>
 <!DOCTYPE html>
@@ -31,8 +49,6 @@ body {
     color:white;
 }
 
-/* ------------------- */
-/* BOTÃO CADASTRAR */
 .btn-pink {
     background:#d63384;
     color:white;
@@ -43,8 +59,6 @@ body {
     color:white;
 }
 
-/* ------------------- */
-/* ESTILO DOS AÇÕES IGUAL AO DE USUÁRIO */
 .btn-edit {
     background:#ffd6e8;
     border:none;
@@ -64,7 +78,6 @@ body {
     transition:.2s;
 }
 .btn-delete:hover { background:#ff7b7b; }
-
 </style>
 </head>
 
@@ -73,6 +86,17 @@ body {
 <h1 class="titulo">📚 Lista de Livros</h1>
 
 <div class="container">
+
+<!-- 🔍 CAMPO DE PESQUISA -->
+<form method="GET" class="mb-3">
+    <input 
+        type="text" 
+        name="pesquisa" 
+        class="form-control"
+        placeholder="Pesquisar por título, autor, editora, ano…"
+        value="<?= $pesquisa ?>"
+    >
+</form>
 
 <a href="cria_livro.php" class="btn btn-pink mb-3">
     <i class="fa fa-plus"></i> Cadastrar Livro
@@ -100,12 +124,10 @@ body {
     <td><?= $l['anoPublicacao'] ?></td>
     <td>
 
-       
         <a href="edita_livro.php?id=<?= $l['id'] ?>" class="btn-edit">
             <i class="fa-solid fa-pen"></i>
         </a>
 
-       
         <a href="deleta_livro.php?id=<?= $l['id'] ?>"
            class="btn-delete"
            onclick="return confirm('Tem certeza que deseja excluir este livro?');">

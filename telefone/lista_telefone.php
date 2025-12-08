@@ -1,10 +1,29 @@
 <?php
 include '../conexao.php';
 
-$sql = "SELECT telefone.*, usuario.nome 
+// Recebe a busca
+$pesquisa = $_GET['pesquisa'] ?? '';
+$pesq = mysqli_real_escape_string($conexao, $pesquisa);
+
+// Se estiver vazio → lista tudo
+if (empty($pesquisa)) {
+    $sql = "SELECT telefone.*, usuario.nome 
+            FROM telefone 
+            JOIN usuario ON telefone.usuario_id = usuario.id
+            ORDER BY usuario.nome ASC";
+} else {
+    $sql = "
+        SELECT telefone.*, usuario.nome 
         FROM telefone 
         JOIN usuario ON telefone.usuario_id = usuario.id
-        ORDER BY usuario.nome ASC";
+        WHERE 
+            LOWER(usuario.nome) LIKE LOWER('%$pesq%')
+        OR  LOWER(telefone.DDD) LIKE LOWER('%$pesq%')
+        OR  LOWER(telefone.telefone) LIKE LOWER('%$pesq%')
+        OR  LOWER(telefone.id) LIKE LOWER('%$pesq%')
+        ORDER BY usuario.nome ASC
+    ";
+}
 
 $result = mysqli_query($conexao, $sql);
 ?>
@@ -38,7 +57,6 @@ $result = mysqli_query($conexao, $sql);
             color:white;
         }
 
-        /* Botão Editar */
         .btn-edit {
             background:#ffd6e8;
             border:none;
@@ -49,7 +67,6 @@ $result = mysqli_query($conexao, $sql);
         }
         .btn-edit:hover { background:#ffb3d9; }
 
-        /* Botão Excluir */
         .btn-delete {
             background:#ff9c9c;
             border:none;
@@ -68,6 +85,17 @@ $result = mysqli_query($conexao, $sql);
 <h1 class="titulo">📞 Telefones Cadastrados</h1>
 
 <div class="container">
+
+    <!-- 🔍 CAMPO DE PESQUISA -->
+    <form method="GET" class="mb-3">
+        <input 
+            type="text" 
+            name="pesquisa" 
+            class="form-control"
+            placeholder="Pesquisar por nome, DDD, telefone…"
+            value="<?= $pesquisa ?>"
+        >
+    </form>
 
     <a href="cria_telefone.php" class="btn btn-pink mb-3">
         <i class="fa fa-plus"></i> Adicionar Telefone
@@ -93,12 +121,10 @@ $result = mysqli_query($conexao, $sql);
                 <td><?= $row['telefone'] ?></td>
 
                 <td>
-                    <!-- Editar -->
                     <a href="edita_telefone.php?id=<?= $row['id'] ?>" class="btn-edit">
                         <i class="fa-solid fa-pen"></i>
                     </a>
 
-                    <!-- Excluir -->
                     <a href="excluir_telefone.php?id=<?= $row['id'] ?>" 
                        class="btn-delete"
                        onclick="return confirm('Deseja excluir?')">

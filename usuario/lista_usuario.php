@@ -2,16 +2,20 @@
 include '../conexao.php';
 
 $pesquisa = $_GET['pesquisa'] ?? '';
+$pesq = mysqli_real_escape_string($conexao, $pesquisa);
 
 if (empty($pesquisa)) {
     $sql = "SELECT * FROM usuario";
 } else {
-    $pesquisa = mysqli_real_escape_string($conexao, $pesquisa);
-    $sql = "SELECT * FROM usuario 
-            WHERE nome LIKE '%$pesquisa%'
-               OR email LIKE '%$pesquisa%'
-               OR telefone LIKE '%$pesquisa%'
-               OR idade LIKE '%$pesquisa%'";
+    $sql = "
+        SELECT * FROM usuario
+        WHERE 
+            LOWER(nome) LIKE LOWER('%$pesq%')
+        OR  LOWER(email) LIKE LOWER('%$pesq%')
+        OR  LOWER(telefone) LIKE LOWER('%$pesq%')
+        OR  LOWER(idade) LIKE LOWER('%$pesq%')
+        OR  LOWER(id) LIKE LOWER('%$pesq%')
+    ";
 }
 
 $resultado = mysqli_query($conexao, $sql);
@@ -115,7 +119,7 @@ $resultado = mysqli_query($conexao, $sql);
             type="text" 
             name="pesquisa" 
             class="form-control"
-            placeholder="Buscar por nome, email, idade ou telefone…"
+            placeholder="Buscar por nome, email, idade, telefone ou ID…"
             value="<?= $pesquisa ?>"
         >
     </form>
