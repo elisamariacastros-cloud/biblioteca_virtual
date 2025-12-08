@@ -25,7 +25,7 @@ body { background:#ffe6f2; min-height:100vh; display:flex; align-items:center; j
 
 <h3 class="text-center mb-3" style="color:#d63384;">Registrar Download</h3>
 
-<form action="insere_download.php" method="post">
+<form action="processa_download.php" method="post">
 
 <div class="mb-3">
 <label>Usuário</label>

@@ -31,7 +31,7 @@ body { background:#ffe6f2; }
 <div class="card-form">
 <h3 class="text-center mb-3">Cadastrar Telefone</h3>
 
-<form action="insere_telefone.php" method="post">
+<form action="processa_telefone.php" method="post">
 
     <label class="form-label">Usuário</label>
     <select name="usuario_id" class="form-control mb-3" required>

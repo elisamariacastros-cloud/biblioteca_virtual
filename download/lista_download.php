@@ -4,7 +4,7 @@ include "../conexao.php";
 $sql = "SELECT download.id, 
                usuario.nome AS usuario,
                livro.titulo AS livro,
-               download.dataDownload
+               download.dataHoraBaixou AS dataHoraDownload
         FROM download
         JOIN usuario ON usuario.id = download.usuario_id
         JOIN livro ON livro.id = download.livro_id
@@ -18,12 +18,38 @@ $resultado = mysqli_query($conexao, $sql);
 <meta charset="UTF-8">
 <title>Lista de Downloads</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ÍCONES FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
 <style>
 body { background:#ffe6f2; font-family:Inter, sans-serif; }
 .titulo { text-align:center; margin:30px 0; font-weight:700; color:#d63384; }
 .table thead { background:#d63384; color:white; }
 .btn-pink { background:#d63384; color:white; }
 .btn-pink:hover { background:#b0266a; color:white; }
+
+/* BOTÕES DE AÇÃO IGUAL AOS OUTROS */
+.btn-edit {
+    background:#ffd6e8;
+    border:none;
+    color:#d63384;
+    padding:6px 12px;
+    border-radius:8px;
+    transition:.2s;
+}
+.btn-edit:hover { background:#ffb3d9; }
+
+.btn-delete {
+    background:#ff9c9c;
+    border:none;
+    color:white;
+    padding:6px 12px;
+    border-radius:8px;
+    transition:.2s;
+}
+.btn-delete:hover { background:#ff7b7b; }
+
 </style>
 </head>
 
@@ -34,13 +60,13 @@ body { background:#ffe6f2; font-family:Inter, sans-serif; }
 <div class="container">
 <a href="cria_download.php" class="btn btn-pink mb-3">+ Registrar Download</a>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped align-middle">
 <thead>
 <tr>
     <th>ID</th>
     <th>Usuário</th>
     <th>Livro</th>
-    <th>Data</th>
+    <th>Data Hora</th>
     <th>Ações</th>
 </tr>
 </thead>
@@ -50,11 +76,20 @@ body { background:#ffe6f2; font-family:Inter, sans-serif; }
     <td><?= $d['id'] ?></td>
     <td><?= $d['usuario'] ?></td>
     <td><?= $d['livro'] ?></td>
-    <td><?= $d['dataDownload'] ?></td>
+   <td><?= date('d-m-Y H:i:s', strtotime($d['dataHoraDownload'])) ?></td>
+
     <td>
-        <a href="edita_download.php?id=<?= $d['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
-        <a href="deleta_download.php?id=<?= $d['id'] ?>" class="btn btn-danger btn-sm"
-        onclick="return confirm('Deseja excluir este download?')">Excluir</a>
+
+        <a href="edita_download.php?id=<?= $d['id'] ?>" class="btn-edit">
+            <i class="fa-solid fa-pen"></i>
+        </a>
+
+        <a href="deleta_download.php?id=<?= $d['id'] ?>" 
+           class="btn-delete"
+           onclick="return confirm('Deseja excluir este download?')">
+            <i class="fa-solid fa-trash"></i>
+        </a>
+
     </td>
 </tr>
 <?php endwhile; ?>

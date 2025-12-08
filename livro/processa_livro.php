@@ -1,19 +1,34 @@
 <?php
-include '../conexao.php';
+include "../conexao.php";
 
-$titulo = $_POST['titulo'];
-$autor  = $_POST['autor'];
-$editora = $_POST['editora'];
-$numeroPagina = $_POST['numeroPagina'];
-$anoPublicacao = $_POST['anoPublicacao'];
-$indicacaoIdade = $_POST['indicacaoIdade'];
-$descricao = $_POST['descricao'];
-$sinopse = $_POST['sinopse'];
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: cria_livro.php");
+    exit;
+}
 
-$sql = "INSERT INTO livro (titulo, autor, editora, numeroPagina, anoPublicacao, indicacaoIdade, descricao, sinopse)
-        VALUES ('$titulo', '$autor', '$editora', $numeroPagina, $anoPublicacao, $indicacaoIdade, '$descricao', '$sinopse')";
+// pega e sanitiza
+$titulo = mysqli_real_escape_string($conexao, $_POST['titulo'] ?? '');
+$autor = mysqli_real_escape_string($conexao, $_POST['autor'] ?? '');
+$editora = mysqli_real_escape_string($conexao, $_POST['editora'] ?? '');
+$anoPublicacao = (int)($_POST['anoPublicacao'] ?? 0);
+$numeroPagina = (int)($_POST['numeroPagina'] ?? 0);
+$indicacaoIdade = (int)($_POST['indicacaoIdade'] ?? 0);
+$descricao = mysqli_real_escape_string($conexao, $_POST['descricao'] ?? '');
+$sinopse = mysqli_real_escape_string($conexao, $_POST['sinopse'] ?? '');
+$capa = mysqli_real_escape_string($conexao, $_POST['capa'] ?? ''); // <- aqui
 
-mysqli_query($conexao, $sql);
+// Inserção (certifique-se que a tabela e colunas existem)
+$sql = "INSERT INTO livro 
+    (titulo, autor, editora, anoPublicacao, numeroPagina, indicacaoIdade, descricao, sinopse, capa)
+    VALUES
+    ('$titulo', '$autor', '$editora', $anoPublicacao, $numeroPagina, $indicacaoIdade, '$descricao', '$sinopse', '$capa')";
 
-header("Location: lista_livro.php");
-exit;
+if (mysqli_query($conexao, $sql)) {
+    // redireciona para a lista com mensagem (opcional)
+    header("Location: lista_livro.php");
+    exit;
+} else {
+    // debug simples
+    echo "Erro ao inserir: " . mysqli_error($conexao);
+}
+?>

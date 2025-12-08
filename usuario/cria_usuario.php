@@ -121,6 +121,16 @@ mysqli_close($conexao);
         </div>
 
         <button type="submit" class="btn btn-pink w-100" name="salvar">Salvar</button>
+     <div class="text-center mt-3">
+    <small>Já tem uma conta? 
+        <a href="login.php" style=" font-weight:600;">
+            Faça login
+        </a>
+    </small>
+</div>
+
+     
+     
       </form>
 
       

@@ -32,7 +32,7 @@ body { background:#ffe6f2; }
 
 <h3 class="text-center mb-3">Cadastrar Categoria</h3>
 
-<form action="insere_categoria.php" method="post">
+<form action="processa_categoria.php" method="post">
 
     <label class="form-label">Livro</label>
     <select name="livro_id" class="form-control mb-3" required>

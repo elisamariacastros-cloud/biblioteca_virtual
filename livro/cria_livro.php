@@ -7,34 +7,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-:root{
-  --pink:#d63384;
-  --pink-dark:#b0266a;
-}
-body{
-  background:#ffe6f2;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:2rem;
-}
-.card-form{
-  background:white;
-  padding:2rem;
-  border-radius:14px;
-  width:100%;
-  max-width:750px;
-  box-shadow:0 8px 25px rgba(214,51,132,0.2);
-}
-.btn-pink{
-  background:var(--pink);
-  color:white;
-}
-.btn-pink:hover{
-  background:var(--pink-dark);
-  color:white;
-}
+:root{ --pink:#d63384; --pink-dark:#b0266a; }
+body{ background:#ffe6f2; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem; }
+.card-form{ background:white; padding:2rem; border-radius:14px; width:100%; max-width:750px; box-shadow:0 8px 25px rgba(214,51,132,0.2); }
+.btn-pink{ background:var(--pink); color:white; }
+.btn-pink:hover{ background:var(--pink-dark); color:white; }
 </style>
 </head>
 
@@ -43,7 +20,8 @@ body{
 
 <h3 class="text-center mb-3" style="color:#d63384;">Cadastrar Livro</h3>
 
-<form action="insere_livro.php" method="post">
+<!-- enviar para processa_livro.php -->
+<form action="processa_livro.php" method="post">
 
 <div class="row">
   <div class="col-md-6 mb-3">
@@ -88,7 +66,14 @@ body{
 
 <div class="mb-3">
   <label class="form-label">Sinopse</label>
-  <textarea class="form-control" name="sinopse"></textarea>
+  <textarea class="form-control" name="sinopse" rows="3"></textarea>
+</div>
+
+<!-- CAMPO NOVO: URL DA CAPA -->
+<div class="mb-3">
+  <label class="form-label">Capa (URL da imagem)</label>
+  <input type="url" class="form-control" name="capa" placeholder="https://exemplo.com/capa.jpg">
+  <small class="text-muted">Cole a URL da imagem de capa (ou deixe em branco).</small>
 </div>
 
 <button type="submit" class="btn btn-pink w-100">Cadastrar</button>

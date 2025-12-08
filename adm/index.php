@@ -45,7 +45,6 @@ include "../conexao.php";
             font-weight: bold;
         }
 
-        /* Ajustes especiais para telas pequenas */
         @media (max-width: 576px) {
             h1.titulo {
                 font-size: 28px;
@@ -59,81 +58,180 @@ include "../conexao.php";
                 padding: 15px;
             }
         }
+
+        .secao-titulo {
+            color: var(--rosa-escuro);
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        hr.divisor {
+            border: 2px solid var(--rosa-principal);
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="container mt-4">
+<div class="container mt-4">
 
-        <h1 class="text-center mb-4 titulo">Painel do Administrador</h1>
+    <h1 class="titulo text-center mb-4">Painel do Administrador</h1>
 
-      
-        <div class="row g-4 justify-content-center">
+    <!-- SEÇÃO CRUDs -->
+    <h2 class="secao-titulo">CRUDs</h2>
+    <hr class="divisor">
 
-            <!-- CRUD USUÁRIOS -->
-            <div class="col-10 col-sm-6 col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Usuários</h5>
-                        <a href="../usuario/lista_usuario.php" class="btn btn-rosa mt-2 w-100">Gerenciar Usuários</a>
-                    </div>
+    <div class="row g-4 justify-content-center">
+
+        <!-- CRUD USUÁRIOS -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Usuários</h5>
+                    <a href="../usuario/lista_usuario.php" class="btn btn-rosa mt-2 w-100">Gerenciar Usuários</a>
                 </div>
             </div>
+        </div>
 
-            <!-- CRUD LIVROS -->
-            <div class="col-10 col-sm-6 col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Livros</h5>
-                        <a href="../livro/lista_livro.php" class="btn btn-rosa mt-2 w-100">Gerenciar Livros</a>
-                    </div>
+        <!-- CRUD LIVROS -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Livros</h5>
+                    <a href="../livro/lista_livro.php" class="btn btn-rosa mt-2 w-100">Gerenciar Livros</a>
                 </div>
             </div>
+        </div>
 
-            <!-- CRUD CATEGORIAS -->
-            <div class="col-10 col-sm-6 col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Categorias</h5>
-                        <a href="../categoria/lista_categoria.php" class="btn btn-rosa mt-2 w-100">Gerenciar Categorias</a>
-                    </div>
+        <!-- CRUD CATEGORIAS -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Categorias</h5>
+                    <a href="../categoria/lista_categoria.php" class="btn btn-rosa mt-2 w-100">Gerenciar Categorias</a>
                 </div>
             </div>
+        </div>
 
-            <!-- CRUD DOWNLOADS -->
-            <div class="col-10 col-sm-6 col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Downloads</h5>
-                        <a href="../download/lista_download.php" class="btn btn-rosa mt-2 w-100">Gerenciar Downloads</a>
-                    </div>
+        <!-- CRUD DOWNLOADS -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Downloads</h5>
+                    <a href="../download/lista_download.php" class="btn btn-rosa mt-2 w-100">Gerenciar Downloads</a>
                 </div>
             </div>
+        </div>
 
-            <!-- CRUD TELEFONES -->
-            <div class="col-10 col-sm-6 col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Telefones</h5>
-                        <a href="../telefone/lista_telefone.php" class="btn btn-rosa mt-2 w-100">Gerenciar Telefones</a>
-                    </div>
+        <!-- CRUD TELEFONES -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Telefones</h5>
+                    <a href="../telefone/lista_telefone.php" class="btn btn-rosa mt-2 w-100">Gerenciar Telefones</a>
                 </div>
             </div>
-
-            <!-- LOGOUT -->
-            <div class="col-10 col-sm-6 col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Sair</h5>
-                        <a href="../usuario/login.php" class="btn btn-danger mt-2 w-100">Logout</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
     </div>
+
+    <!-- SEÇÃO CONSULTAS -->
+    <h2 class="secao-titulo">Consultas</h2>
+    <hr class="divisor">
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- Downloads por Livro -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Downloads por Livro</h5>
+                    <a href="../consultas/downloads_por_livro.php" class="btn btn-rosa mt-2 w-100">Ver Consulta</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Livros por Categoria -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Livros por Categoria</h5>
+                    <a href="../consultas/livro_por_categoria.php" class="btn btn-rosa mt-2 w-100">Ver Consulta</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usuário com Mais Downloads -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Usuário com Mais Downloads</h5>
+                    <a href="../consultas/usuario_mais_download.php" class="btn btn-rosa mt-2 w-100">Ver Consulta</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usuários que Mais Baixam -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Usuários que Mais Baixam</h5>
+                    <a href="../consultas/usuarios_mais_downloads.php" class="btn btn-rosa mt-2 w-100">Ver Consulta</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Livros Mais Baixados -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Livros Mais Baixados</h5>
+                    <a href="../consultas/livro_mais_baixado.php" class="btn btn-rosa mt-2 w-100">Ver Consulta</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Livros Menos Baixados -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Livros Menos Baixados</h5>
+                    <a href="../consultas/livro_menos_baixado.php" class="btn btn-rosa mt-2 w-100">Ver Consulta</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Dashboard</h5>
+                    <a href="../consultas/dashboard.php" class="btn btn-rosa mt-2 w-100">Ver Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SEÇÃO LOGOUT -->
+    <h2 class="secao-titulo">Logout</h2>
+    <hr class="divisor">
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-10 col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Sair do Sistema</h5>
+                    <a href="../usuario/login.php" class="btn btn-danger mt-2 w-100">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
