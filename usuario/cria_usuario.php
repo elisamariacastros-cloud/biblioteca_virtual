@@ -1,45 +1,3 @@
-<?php
-session_start();
-include "../conexao.php";
-
-// PROCESSAR O FORMULÁRIO
-if(isset($_POST['salvar'])){
-    $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
-    $email = mysqli_real_escape_string($conexao, $_POST["email"]);
-    $senha = $_POST["senha"]; 
-    $idade = (int)$_POST["idade"];
-    $telefone = mysqli_real_escape_string($conexao, $_POST["telefone"]);
-
-    // Validações
-    if(strlen($senha) < 8){
-        echo "<script>alert('Senha precisa ter ao menos 8 caracteres'); history.back();</script>";
-        exit;
-    }
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        echo "<script>alert('Email inválido'); history.back();</script>";
-        exit;
-    }
-    if($idade < 1 || $idade > 120){
-        echo "<script>alert('Idade deve ser entre 1 e 120'); history.back();</script>";
-        exit;
-    }
-
-    // INSERT
-    $sql = "INSERT INTO usuario (nome, email, senha, idade, telefone) 
-            VALUES ('$nome', '$email', '$senha', $idade, '$telefone')";
-
-    if(mysqli_query($conexao, $sql)){
-        $_SESSION['sucesso'] = "Usuário cadastrado com sucesso!";
-        header("Location: login.php");
-        exit;
-    } else {
-        echo "<script>alert('Erro ao cadastrar usuário'); history.back();</script>";
-        exit;
-    }
-}
-
-mysqli_close($conexao);
-?>
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -48,7 +6,7 @@ mysqli_close($conexao);
   <title>Adicionar Usuário — Biblioteca Virtual</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     :root{
@@ -61,12 +19,16 @@ mysqli_close($conexao);
 
     body {
       background: #ffe6f2;
-      padding: 2rem;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
     .card-form {
+      width: 100%;
       max-width: 600px;
-      margin: auto;
       border-radius: 14px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.08);
       background: #fff;
@@ -80,6 +42,18 @@ mysqli_close($conexao);
       font-weight: 600;
     }
 
+    /* RESPONSIVIDADE */
+    @media (max-width: 576px) {
+      body {
+        padding: 1rem;
+      }
+      .card-form {
+        padding: 1.4rem;
+      }
+      h4 {
+        font-size: 1.2rem;
+      }
+    }
   </style>
 </head>
 
@@ -121,19 +95,16 @@ mysqli_close($conexao);
         </div>
 
         <button type="submit" class="btn btn-pink w-100" name="salvar">Salvar</button>
-     <div class="text-center mt-3">
-    <small>Já tem uma conta? 
-        <a href="login.php" style=" font-weight:600;">
-            Faça login
-        </a>
-    </small>
-</div>
 
-     
-     
+        <div class="text-center mt-3">
+            <small>Já tem uma conta? 
+                <a href="login.php" style="font-weight:600;">
+                    Faça login
+                </a>
+            </small>
+        </div>
+
       </form>
-
-      
 </div>
 
 <script>
@@ -152,5 +123,6 @@ document.getElementById('togglePwd').addEventListener('click', function () {
     }
 });
 </script>
+
 </body>
 </html>
